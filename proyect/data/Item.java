@@ -1,6 +1,6 @@
-package k_means2;
+package data;
 
-import utility.ArraySet;
+import java.util.Set;
 
 //Classe Item che modella un generico item (coppia attributo-valore)
 public abstract class Item {
@@ -22,7 +22,7 @@ public abstract class Item {
 
 	public abstract double distance(Object a);
 
-	public void update(Data data, ArraySet clusteredData) {
+	public void update(Data data, Set<Integer> clusteredData) {
 		value = data.computePrototype(clusteredData, attribute);
 	}
 

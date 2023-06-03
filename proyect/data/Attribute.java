@@ -1,8 +1,8 @@
-package k_means2;
+package data;
 
 abstract class Attribute {
-	private String name;
-	private int index;
+	protected String name;
+	protected int index;
 
 	public Attribute(String name, int index) {
 		this.name = name;

@@ -1,33 +1,42 @@
-package k_means2;
+package mining;
+
+import Exceptions.OutOfRangeSampleSize;
+import data.Data;
+import data.Tuple;
 
 public class ClusterSet {
-	private Cluster[] C;
-	private int i;
+	Cluster[] C;
+	int i;
 
-	public ClusterSet(int k) {
+	ClusterSet(int k) {
 		C = new Cluster[k];
 		i = 0;
 	}
 
-	public void add(Cluster c) {
+	void add(Cluster c) {
 		C[i++] = c;
 	}
 
-	public Cluster get(int i) {
+	Cluster get(int i) {
 		return C[i];
 	}
 
-	public void initializeCentroids(Data data) {
-		int[] centroidIndexes = data.sampling(C.length);
-		for (int i = 0; i < centroidIndexes.length; i++) {
-			Tuple centroid = data.getItemSet(centroidIndexes[i]);
-			add(new Cluster(centroid));
+	public void initializeCentroids(Data data) throws OutOfRangeSampleSize {
+		try {
+			int[] centroidIndexes = data.sampling(C.length);
+
+			for (int i = 0; i < centroidIndexes.length; i++) {
+				Tuple centroid = data.getItemSet(centroidIndexes[i]);
+				add(new Cluster(centroid));
+			}
+		} catch (OutOfRangeSampleSize e) {
+			e.printStackTrace();
 		}
 	}
 
-	public Cluster nearestCluster(Tuple tuple) {
+	Cluster nearestCluster(Tuple tuple) {
 		// Initialise the minDistance with the first distance
-		double minDistance = Double.MAX_VALUE; //C[0].getCentroid().getDistance(tuple);
+		double minDistance = Double.MAX_VALUE; // C[0].getCentroid().getDistance(tuple);
 		Cluster nearestCluster = null;
 		for (int i = 0; i < C.length; i++) {
 			double distance = tuple.getDistance(C[i].getCentroid());
@@ -39,7 +48,7 @@ public class ClusterSet {
 		return nearestCluster;
 	}
 
-	public Cluster currentCluster(int id) {
+	Cluster currentCluster(int id) {
 		for (int i = 0; i < C.length; i++) {
 			if (C[i].contain(id)) {
 				return C[i];
@@ -48,13 +57,13 @@ public class ClusterSet {
 		return null;
 	}
 
-	public void updateCentroids(Data data) {
+	void updateCentroids(Data data) {
 		for (int i = 0; i < C.length; i++) {
 			C[i].computeCentroid(data);
 		}
 	}
 
-	//@Override
+	// @Override
 	public String toString() {
 		String str = "";
 		for (int i = 0; i < C.length; i++) {

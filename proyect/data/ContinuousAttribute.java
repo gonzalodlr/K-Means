@@ -1,4 +1,4 @@
-package k_means1;
+package data;
 
 class ContinuousAttribute extends Attribute {
 	protected double max;

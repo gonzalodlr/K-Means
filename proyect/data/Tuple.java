@@ -1,4 +1,4 @@
-package k_means2;
+package data;
 
 public class Tuple {
 	private Item[] tuple;
@@ -22,7 +22,7 @@ public class Tuple {
 	public double getDistance(Tuple obj) {
 		double distance = 0.0;
 		for (int i = 0; i < tuple.length; i++) {
-			distance += tuple[i].distance(obj.get(i).getValue());
+			distance += tuple[i].distance(obj.get(i));
 		}
 		return distance;
 	}

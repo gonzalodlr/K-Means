@@ -1,10 +1,13 @@
-package k_means2;
+package mining;
 
-import utility.ArraySet;
+import java.util.HashSet;
+import java.util.Set;
+import data.Data;
+import data.Tuple;
 
 public class Cluster {
 	private Tuple centroid;
-	private ArraySet clusteredData;
+	private Set<Integer> clusteredData;
 
 	/*
 	 * Cluster(){
@@ -12,35 +15,35 @@ public class Cluster {
 	 * }
 	 */
 
-	public Cluster(Tuple centroid) {
+	Cluster(Tuple centroid) {
 		this.centroid = centroid;
-		clusteredData = new ArraySet();
+		clusteredData = new HashSet<Integer>();
 	}
 
-	public Tuple getCentroid() {
+	Tuple getCentroid() {
 		return centroid;
 	}
 
-	public void computeCentroid(Data data) {
+	void computeCentroid(Data data) {
 		for (int i = 0; i < centroid.getLength(); i++) {
 			centroid.get(i).update(data, clusteredData);
 		}
 	}
 
 	// return true if the tuple is changing cluster
-	public boolean addData(int id) {
+	boolean addData(int id) {
 		return clusteredData.add(id);
 
 	}
 
 	// verifica se una transazione � clusterizzata nell'array corrente
-	public boolean contain(int id) {
-		return clusteredData.get(id);
+	boolean contain(int id) {
+		return clusteredData.contains(id);
 	}
 
 	// remove the tuplethat has changed the cluster
-	public void removeTuple(int id) {
-		clusteredData.delete(id);
+	void removeTuple(int id) {
+		clusteredData.remove(id);
 	}
 
 	public String toString() {
@@ -56,7 +59,12 @@ public class Cluster {
 		for (int i = 0; i < centroid.getLength(); i++)
 			str += centroid.get(i) + " ";
 		str += ")\nExamples:\n";
-		int array[] = clusteredData.toArray();
+		Object[] objectArray = clusteredData.toArray();
+		
+		int[] array = new int[objectArray.length];
+		for (int i = 0; i < objectArray.length; i++) {
+		    array[i] = (int) objectArray[i];
+		}
 		for (int i = 0; i < array.length; i++) {
 			str += "[";
 			for (int j = 0; j < data.getNumberOfAttributes(); j++)
@@ -64,7 +72,7 @@ public class Cluster {
 			str += "] dist=" + getCentroid().getDistance(data.getItemSet(array[i])) + "\n";
 
 		}
-		str += "\nAvgDistance=" + getCentroid().avgDistance(data, array);
+		str += "\nAvgDistance=" + getCentroid().avgDistance(data, array) + "\n";
 		return str;
 
 	}

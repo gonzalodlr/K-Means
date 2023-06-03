@@ -1,4 +1,4 @@
-package k_means2;
+package data;
 
 //Classe DiscreteItem che estende la classe Item e rappresenta una coppia <Attributo discreto- valore discreto>
 public class DiscreteItem extends Item {
@@ -8,7 +8,7 @@ public class DiscreteItem extends Item {
 
 	@Override
 	public double distance(Object a) {
-		if (getValue().equals(a))
+		if (getValue().equals(((DiscreteItem) a).getValue()))
 			return 0.0;
 		else
 			return 1.0;
