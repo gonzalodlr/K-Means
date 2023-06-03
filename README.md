@@ -1,2 +1,1 @@
 # K-Means
-Meto Project
