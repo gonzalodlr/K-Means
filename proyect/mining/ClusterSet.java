@@ -22,20 +22,16 @@ public class ClusterSet {
 	}
 
 	public void initializeCentroids(Data data) throws OutOfRangeSampleSize {
-		try {
-			int[] centroidIndexes = data.sampling(C.length);
 
-			for (int i = 0; i < centroidIndexes.length; i++) {
-				Tuple centroid = data.getItemSet(centroidIndexes[i]);
-				add(new Cluster(centroid));
-			}
-		} catch (OutOfRangeSampleSize e) {
-			e.printStackTrace();
+		int[] centroidIndexes = data.sampling(C.length);
+
+		for (int i = 0; i < centroidIndexes.length; i++) {
+			Tuple centroid = data.getItemSet(centroidIndexes[i]);
+			add(new Cluster(centroid));
 		}
 	}
 
 	Cluster nearestCluster(Tuple tuple) {
-		// Initialise the minDistance with the first distance
 		double minDistance = Double.MAX_VALUE; // C[0].getCentroid().getDistance(tuple);
 		Cluster nearestCluster = null;
 		for (int i = 0; i < C.length; i++) {
