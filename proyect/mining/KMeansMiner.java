@@ -17,7 +17,7 @@ public class KMeansMiner implements Serializable {
 	public KMeansMiner(int k) {
 		C = new ClusterSet(k);
 	}
-	
+
 	public KMeansMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
 		C = (ClusterSet) in.readObject();
@@ -36,12 +36,8 @@ public class KMeansMiner implements Serializable {
 
 	public int kmeans(Data data) throws OutOfRangeSampleSize {
 		int numberOfIterations = 0;
-		try {
-			// STEP 1
-			C.initializeCentroids(data);
-		} catch (OutOfRangeSampleSize e) {
-			e.printStackTrace();
-		}
+		// STEP 1
+		C.initializeCentroids(data);
 		boolean changedCluster;
 		do {
 			numberOfIterations++;

@@ -39,7 +39,8 @@ public class TableData {
 				for (int i = 0; i < tableSchema.getNumberOfAttributes(); i++) {
 					TableSchema.Column column = tableSchema.getColumn(i);
 					if (column.isNumber()) {
-						example.add(r.getDouble(column.getColumnName()));
+						// Should add the Double value, as getDouble()?
+						example.add(r.getFloat(column.getColumnName()));
 					} else {
 						example.add(r.getString(column.getColumnName()));
 					}
@@ -79,17 +80,17 @@ public class TableData {
 		String query = "";
 
 		if (aggregate == QUERY_TYPE.MIN) {
-			query = "SELECT MIN(" + column.getColumnName() + ") FROM " + table;
+			query = "SELECT MIN(" + column.getColumnName() + ") AS " + column.getColumnName() + " FROM " + table;
 		} else if (aggregate == QUERY_TYPE.MAX) {
-			query = "SELECT MAX(" + column.getColumnName() + ") FROM " + table;
+			query = "SELECT MAX(" + column.getColumnName() + ") AS " + column.getColumnName() + " FROM " + table;
 		}
 
 		ResultSet r = s.executeQuery(query);
 
 		if (r.next()) {
-			result = r.getObject(1);
+			result = r.getObject(column.getColumnName());
 		} else {
-			// ResultSet empty null value exception
+			// ResultSet empty NoValueException
 			throw new NoValueException("No value found for aggregate " + aggregate);
 		}
 
@@ -97,7 +98,7 @@ public class TableData {
 		s.close();
 
 		if (result == null) {
-			// ResultSet null value exception
+			// ResultSet null: NoValueException
 			throw new NoValueException("No value found for aggregate " + aggregate);
 		}
 

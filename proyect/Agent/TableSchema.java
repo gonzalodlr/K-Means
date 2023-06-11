@@ -6,11 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class TableSchema {
-	DbAccess db;
+	protected DbAccess db;
 
 	public class Column {
 		private String name;
@@ -34,7 +33,7 @@ public class TableSchema {
 		}
 	}
 
-	List<Column> tableSchema = new ArrayList<Column>();
+	private List<Column> tableSchema = new ArrayList<Column>();
 
 	public TableSchema(DbAccess db, String tableName) throws SQLException {
 		this.db = db;
@@ -55,7 +54,6 @@ public class TableSchema {
 		ResultSet res = meta.getColumns(null, null, tableName, null);
 
 		while (res.next()) {
-
 			if (mapSQL_JAVATypes.containsKey(res.getString("TYPE_NAME")))
 				tableSchema.add(
 						new Column(res.getString("COLUMN_NAME"), mapSQL_JAVATypes.get(res.getString("TYPE_NAME"))));

@@ -8,7 +8,7 @@ public class ContinuousItem extends Item {
 
 	@Override
 	public double distance(Object a) {
-		/*double abs = 0;
+		double abs = 0;
 		if (a instanceof ContinuousItem) {
 			double scaledValue1 = ((ContinuousAttribute) getAttribute()).getScaledValue((double) getValue());
 			double scaledValue2 = ((ContinuousAttribute) ((ContinuousItem) a).getAttribute())
@@ -16,15 +16,6 @@ public class ContinuousItem extends Item {
 			abs = Math.abs(scaledValue1 - scaledValue2);
 			return abs;
 		}
-		return abs;*/
-		
-		 if (a instanceof ContinuousItem) {
-	            ContinuousItem otherItem = (ContinuousItem) a;
-	            double scaledValue1 = ((ContinuousAttribute) getAttribute()).getScaledValue((double) getValue());
-	            double scaledValue2 = ((ContinuousAttribute) otherItem.getAttribute()).getScaledValue((double)otherItem.getValue());
-	            return Math.abs(scaledValue1 - scaledValue2);
-	        } else {
-	            throw new IllegalArgumentException("The input object is not a ContinuousItem.");
-	        }
+		return abs;
 	}
 }
