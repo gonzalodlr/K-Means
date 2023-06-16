@@ -34,7 +34,7 @@ public class TableData {
 			// ResultSet empty exception
 			throw new EmptySetException("No distinct transactions found in the table.");
 		} else {
-			while (r.next()) {
+			do {
 				Example example = new Example();
 				for (int i = 0; i < tableSchema.getNumberOfAttributes(); i++) {
 					TableSchema.Column column = tableSchema.getColumn(i);
@@ -46,7 +46,7 @@ public class TableData {
 					}
 				}
 				distinctTransactions.add(example);
-			}
+			} while (r.next());
 		}
 		r.close();
 		s.close();

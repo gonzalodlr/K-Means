@@ -56,7 +56,7 @@ public class MainTest {
 		} catch (SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
+			System.out.println("VendorError: " + ex.getErrorCode());			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

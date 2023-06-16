@@ -1,0 +1,14 @@
+Diagramma delle classi (2 punti) 					photo??
+JavaDoc (3 punti)							explaining all methods??
+Guida di installazione (con Jar + Bat + ScriptSQL) (2 punti)		What is jar and bat, I have to do and exe with the server and another with the client?
+Guida utente con esempi di test (2 punti)				Run the program and capture some examples
+Sorgente del sistema (14 punti)						code?
+Estensioni del progetto svolto in laboratorio				upgrades?
+(10
+
+What about eclipse installation?
+
+1. For saving clusters, I have to create a file with the discorvering clusters or upload in the db?
+
+
+2.Question of the null value error, of 15 times I ran the program, sometimes one gets an error of null value in continuous attribute.
