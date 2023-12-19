@@ -7,6 +7,9 @@ Needs:
 - Java
 - Java sql connector (it is included in lib)
 - Create clusters database in MySql, I uploaded the sql script in Project guide folder.
+- You must connect the java sql connector.
+- java -cp .\bin .\src\main\MultiServer.java
+- java -cp .\bin .\src\main\MainTest.java localhost 8080 
 
 For view the documentation followed to create this project, enter the Project guide folder.
 
